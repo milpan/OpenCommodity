@@ -4,10 +4,10 @@ import datetime
 import json
 from ast import literal_eval
 
-def pull_symbol(name):
+def pull_symbol(name,period,interval):
     print("Pulling Information on the Symbol " + name + "/n")
     stock = yf.Ticker(name)
-    history = stock.history(period="1y", interval="1h")
+    history = stock.history(period=period, interval=interval)
     return history;
 
 def pull_symbol_name(name):
