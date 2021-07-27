@@ -1,0 +1,1 @@
+#This strategy uses a safe-haven commodity and measures another commodities ratio compared to its average to decipher wether it is undervalued or overvalued
