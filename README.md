@@ -4,6 +4,7 @@
  
  CAN CURRENTLY:
  -> Calculate a Score based on Historical and Current Price Ratio compared to a Reference Commodity
+ -> Calculate both Relative Strengh and Relative Strength Index of a Given Commodity
  
  TO DO:
  -> Implement Sharpe Ratio
