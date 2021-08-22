@@ -7,3 +7,5 @@ strategies/.ipynb_checkpoints/ratioanalysis-checkpoint.py
 .ipynb_checkpoints/Playground-checkpoint.ipynb
 tools/.ipynb_checkpoints/__init__-checkpoint.py
 tools/.ipynb_checkpoints/pullticker-checkpoint.py
+metrics/.ipynb_checkpoints/sharpe-checkpoint.py
+metrics/__pycache__/sharpe.cpython-38.pyc
