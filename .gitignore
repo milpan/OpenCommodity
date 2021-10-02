@@ -9,3 +9,9 @@ tools/.ipynb_checkpoints/__init__-checkpoint.py
 tools/.ipynb_checkpoints/pullticker-checkpoint.py
 metrics/.ipynb_checkpoints/sharpe-checkpoint.py
 metrics/__pycache__/sharpe.cpython-38.pyc
+metrics/.ipynb_checkpoints/sharpe-checkpoint.py
+metrics/.ipynb_checkpoints/sharpe-checkpoint.py
+metrics/.ipynb_checkpoints/sharpe-checkpoint.py
+metrics/__pycache__/sharpe.cpython-38.pyc
+*.pyc
+strategies/__pycache__/__init__.cpython-38.pyc

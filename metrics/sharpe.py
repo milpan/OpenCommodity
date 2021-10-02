@@ -1,28 +1,25 @@
 import pandas as pd
+from strategies import *
+import matplotlib.pyplot as plt
 
 def calculate_sharpe(PortfolioHistory, ListofSymbol):
-    #method is clunky, will refine this soon...
-    iterator = 0;
-    newHistory = []
+    '''
+    Calculate the Sharpe Ratio of a List of Portfolio History
+    '''
     PctChange = []
     meanPctChange = []
     stdPctChange = []
-    for history in PortfolioHistory:
-        temphistory = pd.DataFrame(data=history['Close'])
-        iterator=iterator+1;
-        newHistory.append(temphistory)
-    #concatanate the result into one large dataframe
-    result = pd.concat(newHistory, axis=1)
-    iterator = 1;
-    #set the appropriate labels
-    result.columns = ListofSymbol
+    outputSharpe = pd.DataFrame()
+    newHistory = format_history(PortfolioHistory, "Close", ListofSymbol)
     #calculate the change in each symbol
-    for history in newHistory:
-        history['PctChange'] = history['Close'].pct_change() * 100
+    for symbolName in ListofSymbol:
+        outputSharpe[f'Pct Change {symbolName}'] = newHistory[symbolName].pct_change() * 100
+        outputSharpe[f'Mean {symbolName}'] = outputSharpe[f'Pct Change {symbolName}'].rolling(365, min_periods=2).mean()
+        outputSharpe[f'Std {symbolName}'] = outputSharpe[f'Pct Change {symbolName}'].rolling(365, min_periods=2).std()
+        outputSharpe[f'Sharpe {symbolName}'] = (outputSharpe[f'Mean {symbolName}']/outputSharpe[f'Std {symbolName}']) * np.sqrt(365)
         #calculate the mean of this percentage change
-        history['Mean'] = history['PctChange'].rolling(365, min_periods=2).mean()
-        history['Std'] = history['PctChange'].rolling(365, min_periods=2).std()
-        history['Sharpe'] = history['PctChange']/history['Std']
-
-    return newHistory;
+        plt.plot(outputSharpe.index[100:],outputSharpe[f'Sharpe {symbolName}'][100:], label=symbolName)
+    plt.legend()
+    plt.show()
+    return outputSharpe;
             
