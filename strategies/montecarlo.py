@@ -1,5 +1,10 @@
 import numpy as np
 import pandas as pd
+from functools import reduce
+
+def generate_random_weights(Weights):
+    n_weights = len(Weights)
+    return np.random.dirichlet(np.ones(n_weights),size=1)
 
 def format_history(list_history, parseby_arg, symbol_name):
     '''
@@ -13,8 +18,23 @@ def format_history(list_history, parseby_arg, symbol_name):
         history = history[parseby_arg]
         target_frame[symbol] = history
     return target_frame
-    
 
-def efficient_frontier():
-    return;
+def portfolio_value(list_history, list_weights, symbol_name):
+    TotalValue = []
+    for i in range(len(list_history)):
+        close_price = list_history[i]['Close']
+        weight = list_weights[i]
+        TotalValue.append(close_price*weight)
+    d = reduce(lambda x, y: x.add(y, fill_value=0), TotalValue)
+    return d;
+
+def efficient_frontier(list_history, list_weights, symbol_name, n_iterations):
+    portfolioValue = []
+    #Generate Random Normal Weights
+    for i in range(n_iterations):
+        newWeights = generate_random_weights(list_weights)
+        #Calculate the portfolio history
+        totalHistory = portfolio_value(list_history, newWeights, symbol_name)
+        portfolioValue.append(totalHistory)
+    return portfolioValue;
     
